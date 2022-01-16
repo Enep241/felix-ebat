@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DevisController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,5 +21,18 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+Route::get('/archive', function () {
+    $user = Auth::user();
+    return view('archive', ['devis' => $user->devis()->get()]);
+})->middleware(['auth'])->name('archive');
+
+Route::get('/archive/{id}', [DevisController::class,'show'])->middleware(['auth'])->name('analyze');
+
+Route::post('/devis/create', [DevisController::class,'store'])->middleware(['auth']);
+
+Route::get('/demande', function () {
+    return view('demande');
+})->middleware(['auth'])->name('demande');
 
 require __DIR__.'/auth.php';

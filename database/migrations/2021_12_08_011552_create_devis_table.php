@@ -16,10 +16,10 @@ class CreateDevisTable extends Migration
         Schema::create('devis', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('object_devis');
-            $table->datetime('date_validation');
+            $table->datetime('date_validation')->nullable();
             $table->boolean('statut')->default(false);
-            $table->float('total_net_ht');
-            $table->float('tva');
+            $table->float('total_net_ht')->nullable()->default(0);
+            $table->float('tva')->default(0.9);
             # $table->unsignedBigInterger('user_id');
             
             //Mise en place des clés étrangères et de la synchronisation de modification et de suppression

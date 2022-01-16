@@ -17,6 +17,15 @@ class Travaux extends Model
     protected $fillable = [
         'ouvrages',
         'travaux',
+        'type_travaux',
+        'types_ouvrages',
+        'materiel_primaire',
+        'quantite_primaire',
+        'quantite_secondaire',
+        'nombre_mcarre',
+        'duree_estimee',
+        'price_materiel_primaire',
+        'devis_id'
     ];
 
     /**

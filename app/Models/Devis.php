@@ -16,9 +16,11 @@ class Devis extends Model
      */
     protected $fillable = [
         'object_devis',
-        'date_creation',
+        'user_id',
+        'total_net_ht',
         'date_validation',
-        'etat_devis',
+        'statut',
+        'tva',
     ];
 
     /**
@@ -27,7 +29,7 @@ class Devis extends Model
      * @var array
      */
     protected $hidden = [
-        'id_customer',
+        'user_id',
     ];
 
     /**
@@ -46,17 +48,11 @@ class Devis extends Model
      */
     protected $table = 'devis';
     
-    
     /**
-     * The primary key associated with the table.
-     *
-     * @var string
+     * Get the user that owns the devis.
      */
-    protected $primaryKey = 'id_devis';
-    
-    
-    public function devis()
+    public function owner()
     {
-        return $this->hasOne('App\Models\Clients', 'id_devis');
+        return $this->belongsTo(User::class);
     }
 }

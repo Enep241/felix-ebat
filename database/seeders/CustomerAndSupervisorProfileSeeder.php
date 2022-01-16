@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use App\Models\User;
 
 class CustomerAndSupervisorProfileSeeder extends Seeder
 {
@@ -17,25 +18,29 @@ class CustomerAndSupervisorProfileSeeder extends Seeder
     public function run()
     {
         // random customer 
-        DB::table('users')->insert([
+        $random = User::create([
             'name' => Str::random(10),
             'login' => Str::random(10),
             'email' => Str::random(10).'@localhost.com',
             'password' => Hash::make('password'),
         ]);
+        $random->assignRole('customer');
         // default customer 
-        DB::table('users')->insert([
+        $tartampion = User::create([
             'name' => 'tartampion',
             'login' => 'tartampion',
             'email' => 'tartampion@localhost.com',
             'password' => Hash::make('tartampion'),
         ]);
+        $tartampion->assignRole('customer');
+
         // default supervisor 
-        DB::table('users')->insert([
+        $felix = User::create([
             'name' => 'DJEMBI Felix Telly',
             'login' => 'supervisor',
             'email' => 'supervisor@localhost.com',
             'password' => Hash::make('tartampion'),
         ]);
+        $felix->assignRole('supervisor');
     }
 }

@@ -14,9 +14,18 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        Dashboard
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('archive')" :active="request()->routeIs('archive')">
+                        Archives
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('demande')" :active="request()->routeIs('demande')">
+                        Formulaire
                     </x-nav-link>
                 </div>
+
             </div>
 
             <!-- Settings Dropdown -->

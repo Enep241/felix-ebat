@@ -44,6 +44,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get the devis for the user selected.
+     */
+    public function devis()
+    {
+        return $this->hasMany(Devis::class);
+    }
 }
 
 
