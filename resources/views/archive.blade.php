@@ -40,7 +40,7 @@
                             <h3 class="text-gray-800 font-bold mb-3">{{$item->object_devis}}</h3>
                             {{-- affiche lauteur du devis au superviseur --}}
                                 @role('supervisor')
-                                <p class="mb-2">{{$item->owner()->get()}}</p>
+                                <p class="mb-2">{{$item->email}}</p>
                                 @else                      
                                 <p class="mb-2">Depuis le {{$item->created_at}}</p>
                                 @endrole

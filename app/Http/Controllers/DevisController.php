@@ -30,6 +30,7 @@ class DevisController extends Controller
             'object_devis' => $request->input('object'),
             'total_net_ht' => 0,
             'tva' => 0,
+            'email' => $request->input('email'),
             'user_id' => Auth::id()
         ]);
         

@@ -17,6 +17,7 @@ class Devis extends Model
     protected $fillable = [
         'object_devis',
         'user_id',
+        'email',
         'total_net_ht',
         'date_validation',
         'statut',
