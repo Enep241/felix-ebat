@@ -36,54 +36,42 @@
                 
                     <div class="md:grid lg:grid-cols-5 md:grid-cols-3 mlg:grid-cols-4 md:gap-3 space-y-4 md:space-y-0 px-6 md:px-0 mx-auto">
                         @foreach ($devis as $item)
-                        <div class="bg-white p-6 shadow-md rounded-md">
-                            <h3 class="text-xl text-gray-800 font-semibold mb-3">{{$item->object_devis}}</h3>
-                            <p class="mb-2">10 minutes to make</p>
-                            <p class="my-4">blah blah blah</p>
-                            <button
-                                class="text-lg font-semibold text-gray-700 bg-indigo-100 px-4 py-1 block mx-auto rounded-md">
-                                <span class="fa fa-download"></span></fa-download>
-                            </button>
+                        <div class="bg-white p-6 shadow-md rounded-lg">
+                            <h3 class="text-gray-800 font-bold mb-3">{{$item->object_devis}}</h3>
+                            {{-- affiche lauteur du devis au superviseur --}}
+                                @role('supervisor')
+                                <p class="mb-2">{{$item->owner()->get()}}</p>
+                                @else                      
+                                <p class="mb-2">Depuis le {{$item->created_at}}</p>
+                                @endrole
+
+                            {{-- affichons le statut du devis --}}
+                            @switch($item->statut)
+                                @case(1)
+                                    First case...
+                                    <p class="my-4 font-semibold text-green-400">viable</p>
+                                    @break
+
+                                @case(-1)
+                                    Second case...
+                                    <p class="my-4 font-semibold text-red-600">annul&eacute;</p>
+                                    @break
+
+                                @default
+                                    <p class="my-4 font-semibold text-yellow-500">en attente</p>
+                            @endswitch
+
+                            @role('customer')
+                                <button class="text-lg font-semibold text-gray-100 bg-gray-600 pull-left px-4 mx-auto rounded-md">
+                                    <span class="fa fa-download"></span>
+                                </button>
+                            @endrole
+                            <button class="text-lg font-semibold text-gray-700 bg-indigo-100 pull-right px-4 mx-auto rounded-md">Ouvrir</button>
+                        </button>
                         </div>
                         @endforeach
                     </div>
-                    
-                    <div
-                        class="md:grid lg:grid-cols-5 md:grid-cols-3 mlg:grid-cols-4 md:gap-3 space-y-4 md:space-y-0 px-6 md:px-0 mx-auto">
-                        <div class="bg-white p-6 shadow-md rounded-md">
-                            <h3 class="text-xl text-gray-800 font-semibold mb-3">greek salad</h3>
-                            <p class="mb-2">10 minutes to make</p>
-                            <p class="my-4">blah blah blah</p>
-                            <button
-                                class="text-lg font-semibold text-gray-700 bg-indigo-100 px-4 py-1 block mx-auto rounded-md">
-                                <span class="fa fa-download"></span></fa-download></button>
-                        </div>
-                        <div class="bg-white p-6 shadow-md rounded-md">
-                            <h3 class="text-xl text-gray-800 font-semibold mb-3">greek salad</h3>
-                            <p class="mb-2">10 minutes to make</p>
-                            <p class="my-4">blah blah blah</p>
-                            <button
-                                class="text-lg font-semibold text-gray-700 bg-indigo-100 px-4 py-1 block mx-auto rounded-md">Cook
-                                This</button>
-                        </div>
-                        <div class="bg-white p-6 shadow-md rounded-md">
-                            <h3 class="text-xl text-gray-800 font-semibold mb-3">greek salad</h3>
-                            <p class="mb-2">10 minutes to make</p>
-                            <p class="my-4">blah blah blah</p>
-                            <button
-                                class="text-lg font-semibold text-gray-700 bg-indigo-100 px-4 py-1 block mx-auto rounded-md">Cook
-                                This</button>
-                        </div>
-                        <div class="bg-white p-6 shadow-md rounded-md">
-                            <h3 class="text-xl text-gray-800 font-semibold mb-3">greek salad</h3>
-                            <p class="mb-2">10 minutes to make</p>
-                            <p class="my-4">blah blah blah</p>
-                            <button
-                                class="text-lg font-semibold text-gray-700 bg-indigo-100 px-4 py-1 block mx-auto rounded-md">Cook
-                                This</button>
-                        </div>
-                    </div>
-                </div>
+                </div>                
             </main>
         </div>
 

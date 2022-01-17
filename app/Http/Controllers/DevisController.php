@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use DB;
+use PDF;
 
 class DevisController extends Controller
 {
@@ -64,7 +66,21 @@ class DevisController extends Controller
         } else {
             return  Response::withStatus(404);
         }
-
     }
 
+    public function pdfview(Request $request)
+    {
+        return view('pdfview');
+    }
+
+    public function pdfDownload(Request $request)
+    {
+        $items = DB::table("items")->get();
+        view()->share('items',$items);
+        if($request->has('download')){
+        $pdf = PDF::loadView('pdfview');
+            return $pdf->download('pdfview.pdf');
+        }
+        return view('download');
+    }
 }

@@ -24,15 +24,27 @@ Route::get('/dashboard', function () {
 
 Route::get('/archive', function () {
     $user = Auth::user();
-    return view('archive', ['devis' => $user->devis()->get()]);
+    if($user->hasRole('customer')) {
+        return view('archive', ['devis' => $user->devis()->get()]);
+    } elseif($user->hasRole('supervisor')) {
+        return view('archive', ['devis' => App\Models\Devis::all()]);
+    }
 })->middleware(['auth'])->name('archive');
 
 Route::get('/archive/{id}', [DevisController::class,'show'])->middleware(['auth'])->name('analyze');
 
 Route::post('/devis/create', [DevisController::class,'store'])->middleware(['auth']);
+Route::post('/devis/{id}/validate', [DevisController::class,'validate'])
+    ->middleware(['auth'])->name('validate');
+Route::post('/devis/{id}/unvalidate', [DevisController::class,'unvalidate'])
+    ->middleware(['auth'])->name('unvalidate');
 
 Route::get('/demande', function () {
     return view('demande');
 })->middleware(['auth'])->name('demande');
+
+# une route pour telecharger / voir le pdf
+Route::get('pdfview',array('as'=>'pdfview','uses'=>'DevisController@pdfview'));
+Route::get('pdf_download', 'DevisController@pdfDownload');
 
 require __DIR__.'/auth.php';

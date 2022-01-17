@@ -178,6 +178,9 @@ return [
         //ajout de config pour la permission
         Spatie\Permission\PermissionServiceProvider::class,
 
+        # ajout config pour le pdf
+        Barryvdh\DomPDF\ServiceProvider::class,
+        
     ],
 
     /*
@@ -232,6 +235,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        # pdf
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 
